@@ -13,13 +13,13 @@
     </ul>
   </div>
 </div>
-<center> <h1>{% block header %} *Enter your Query*  {% endblock %}</h1><br>
+<center> <h1>{% block header %} Enter your Query  {% endblock %}</h1><br>
 {% block form %}
 <form class="form-inline" role="form" method="POST">
   <div class="form-group">
-    <label for="search">Search</label>
+    <label for="search"></label>
     <input type="text" class="form-control" name="search" placeholder="Search">
-  </div><br><br>
+  </div>
   <input type="submit" name= "sub" value="{% block button %} Go {% endblock %}" class="btn btn-default"></input>
 </form>
 {% endblock %}
