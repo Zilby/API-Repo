@@ -1,7 +1,7 @@
 #Must manually install pytumblr with pip install
 
 from flask import Flask, render_template , request , url_for, g, flash, redirect
-import json, pytumblr
+import json, pytumblr, time
 
 search=""
 data=[]
@@ -14,13 +14,18 @@ def home():
     global search,data
     if request.method=="POST":
         search = request.form.get("search", None)
-        dic = client.tagged(search)
+        dic = client.tagged(search,before=time.time())
+        #cannot set limit higher, or change offset with tumblr's api
+        #however, one can change the timestamp of the posts
+        dic=dic+client.tagged(search,before=time.time()-100000)
+        dic=dic+client.tagged(search,before=time.time()-200000)
+        dic=dic+client.tagged(search,before=time.time()-300000)
+        dic=dic+client.tagged(search,before=time.time()-400000)
+        print len(dic)
         data=[]
         for each in dic:
             if "photos" in each:
                 data.append(each["photos"][0]['original_size']['url'])
-        for each in data:
-            print each
         return redirect(url_for('results'))
     return render_template("home.html")
 
@@ -55,12 +60,3 @@ def results():
 if __name__ == "__main__":
     app.debug=True
     app.run(host="127.0.0.1",port=5678)
-
-#search for results using this
-#client.tagged("example")
-
-#outputs html code with links to many tagged images
-#will have several copies of each image all in different sizes
-#must check if the images are the same using regex or grab
-#individually using dictionaries
-#https://api.tumblr.com/console/calls/tag/tagged
