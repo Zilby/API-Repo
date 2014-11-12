@@ -5,4 +5,28 @@
 {% endblock %}
 {% block header %} Results for {{search}}: {% endblock %}
 {% block form %}
+      <div class="container-fluid">
+	<div class="row">
+	  <div class="col-sm-3">
+	  {% for image in d1 %}
+	    <img src="{{ image }}" class="img-thumbnail" vspace="15">
+	  {% endfor %}
+	  </div>
+	  <div class="col-sm-3">
+	  {% for image in d2 %}
+	    <img src="{{ image }}" class="img-thumbnail" vspace="15">
+	  {% endfor %}
+	  </div>
+	  <div class="col-sm-3">
+	  {% for image in d3 %}
+	    <img src="{{ image }}" class="img-thumbnail" vspace="15">
+	  {% endfor %}
+	  </div>
+	  <div class="col-sm-3">
+	  {% for image in d4 %}
+	    <img src="{{ image }}" class="img-thumbnail" vspace="15">
+	  {% endfor %}
+	  </div>
+	</div>
+      </div>
 {% endblock %}
