@@ -1,4 +1,4 @@
 API-Repo
 ========
 
-For Tumblr API
+Will need to pip install pytumblr to run. 
